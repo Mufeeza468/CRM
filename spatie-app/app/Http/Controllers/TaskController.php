@@ -20,6 +20,7 @@ class TaskController extends Controller
         ]);
     }
 
+
     /**
      * Display the tasks.
      */
@@ -27,6 +28,7 @@ class TaskController extends Controller
     {
         return $tasks = Task::all();
     }
+
 
     /**
      * Update the tasks.
@@ -47,6 +49,7 @@ class TaskController extends Controller
         ]);
     }
 
+
     /**
      * Re-assigning the tasks.
      */
@@ -61,6 +64,7 @@ class TaskController extends Controller
             'message' => "Task Re-Assigned Successfully"
         ]);
     }
+
 
     /**
      * Delete the task
