@@ -5,7 +5,8 @@
 /public/storage
 /storage/*.key
 /vendor
-composer.json
+composer.lock
+package.json
 .env
 .env.backup
 .env.production
@@ -18,4 +19,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-composer.lock.json

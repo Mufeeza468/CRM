@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TeamController;
-use App\Http\Controllers\TeamMemberController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +14,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::post('/logout', [UserController::class, 'logout']);
-});
+Route::post('/create', [TaskController::class, 'assignTask']);
+Route::post('/show', [TaskController::class, 'show']);
 
-// '/api/teams' -> this endpoint is for Team
+Route::delete('/delete/{id}', [TaskController::class, 'destroy']);
 
-Route::resource('teams', TeamController::class);
-
-// '/api/team-members' -> this endpoint is for TeamMember
-
-Route::resource('team-members', TeamMemberController::class);
-
-
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'register']);
+Route::put('/update/{id}', [TaskController::class, 'Update_task']); // for updating complete start
+Route::put('/reassign/{id}', [TaskController::class, 'reassign_task']); // for reassigning the task
