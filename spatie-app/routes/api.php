@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/departments', 'DepartmentController@store');
 
+Route::delete('/departments/{id}', 'DepartmentController@destroy');
+
+Route::put('/departments/{id}', 'DepartmentController@update');
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
