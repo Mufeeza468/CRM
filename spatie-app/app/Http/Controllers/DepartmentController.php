@@ -1,50 +1,42 @@
 <?php
 
-namespace App\Http\Controllers;
+ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
+// use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller
-{
-   
-    public function store(Request $request)
+{   
+    public function adding(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $department = Department::create($validatedData);
-
-        return response()->json(['message' => 'Department created successfully', 'data' => $department], 201);
-    }
-    public function destroy($id)
-    {
-        $department = Department::find($id);
-
-        if (!$department) {
-            return response()->json(['message' => 'Department not found'], 404);
-        }
-
-        $department->delete();
-
-        return response()->json(['message' => 'Department deleted successfully']);
-    }
-    public function update(Request $request, $id)
-    {
-        $department = Department::find($id);
-
-        if (!$department) {
-            return response()->json(['message' => 'Department not found'], 404);
-        }
-
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $department->update($validatedData);
-
-        return response()->json(['message' => 'Department updated successfully', 'data' => $department]);
+        return Department::create([
+            'name'=>$request->input('name'),
+        ]) ;
     }
 
+    // /**
+    //  * Summary of updating
+    //  * @param \Illuminate\Http\Request $request
+    //  * @return \Illuminate\Http\JsonResponse|mixed
+    //  */
+    public function updating(Request $request,$id)
+    {
+        $items= Department::find($id);
+        $items->name=$request->name;
+        $items->update();
+        return response()->json('Department Updated Succesfully');
+    }
+
+    public function delete(Request $request)
+    {
+        $items= Department::findorfail($request->id)->delete();
+        
+        return response()->json('Department deleted Succesfully');
+    }
+    public function getData()
+    {
+        $items= Department::all();
+        return response()->json($items);
+    }
 }

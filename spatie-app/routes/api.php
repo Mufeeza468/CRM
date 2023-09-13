@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::post('/departments', 'DepartmentController@store');
-
-Route::delete('/departments/{id}', 'DepartmentController@destroy');
-
-Route::put('/departments/{id}', 'DepartmentController@update');
-
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('add',[DepartmentController::class,'adding']);
+
+Route::put('update/{id}',[DepartmentController::class,'updating']);
+
+Route::delete('delete/{id}',[DepartmentController::class,'delete']);
+
+Route::get('get',[DepartmentController::class,'getData']);
+
+
