@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,16 @@ Route::delete('/memberdestroy/{id}', [TeamMemberController::class, 'destroy']);
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::post('add',[DepartmentController::class,'adding']);
+
+Route::put('update/{id}',[DepartmentController::class,'updating']);
+
+Route::delete('delete/{id}',[DepartmentController::class,'delete']);
+
+Route::get('get',[DepartmentController::class,'getData']);
+
+
