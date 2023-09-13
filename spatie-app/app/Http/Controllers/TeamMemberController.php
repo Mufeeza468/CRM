@@ -14,63 +14,57 @@ class TeamMemberController extends Controller
     public function index()
     {
         $teamMembers = TeamMember::all();
-        return response()->json(['data' => $teamMembers]);
+        return response()->json (['data' => $teamMembers]);
     }
 
     // store: Create a new team member.
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'Team_ID' => 'required|exists:teams,id',
-            'User_ID' => 'required|exists:users,id',
+        return TeamMember::create([
+            'Team_ID' => $request->Team_ID,
+            'User_ID' => $request->User_ID,
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['error' => $validator->errors()], 400);
+        // }
 
-        $teamMember = TeamMember::create($request->all());
+        //$teamMember = TeamMember::create($request->all());
 
-        return response()->json(['message' => 'Team member created successfully', 'data' => $teamMember], 201);
+        //return response()->json(['message' => 'Team member created successfully', 'data' => $teamMember], 201);
     }
 
     // show: Get a specific team member by ID.
 
-    public function show($id)
-    {
-        $teamMember = TeamMember::find($id);
+    // public function show($id)
+    // {
+    //     $teamMember = TeamMember::find($id);
 
-        if (!$teamMember) {
-            return response()->json(['error' => 'Team member not found'], 404);
-        }
+    //     if (!$teamMember) {
+    //         return response()->json(['error' => 'Team member not found'], 404);
+    //     }
 
-        return response()->json(['data' => $teamMember]);
-    }
+    //     return response()->json(['data' => $teamMember]);
+    // }
 
     // update: Update a team member's information.
 
-    public function update(Request $request, $id)
-    {
-        $teamMember = TeamMember::find($id);
+    // public function update(Request $request)
+    // {
+    //     $teamMember = TeamMember::find($request->id);
 
-        if (!$teamMember) {
-            return response()->json(['error' => 'Team member not found'], 404);
-        }
+    //     if (!$teamMember) {
+    //         return response()->json(['error' => 'Team member not found'], 404);
+    //     }
 
-        $validator = Validator::make($request->all(), [
-            'Team_ID' => 'required|exists:teams,id',
-            'User_ID' => 'required|exists:users,id',
-        ]);
+    //     $teamMember->update([
+    //         'Team_ID' => 'required|exists:teams,id',
+    //         'User_ID' => 'required|exists:users,id',
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
-
-        $teamMember->update($request->all());
-
-        return response()->json(['message' => 'Team member updated successfully', 'data' => $teamMember]);
-    }
+    //     return response()->json(['message' => 'Team member updated successfully', 'data' => $teamMember]);
+    // }
 
     // destroy: Delete a team member.
 

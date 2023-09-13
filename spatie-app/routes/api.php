@@ -23,11 +23,35 @@ Route::middleware('auth:sanctum')->group(function(){
 
 // '/api/teams' -> this endpoint is for Team
 
-Route::resource('teams', TeamController::class);
+//Route::resource('teams', TeamController::class);
 
 // '/api/team-members' -> this endpoint is for TeamMember
 
-Route::resource('team-members', TeamMemberController::class);
+//Route::resource('teammembers', TeamMemberController::class);
+
+
+// Routes for TeamController
+Route::get('/teamindex', [TeamController::class, 'index']);
+
+Route::post('/teamcreate', [TeamController::class, 'store']);
+
+Route::get('/teamshow/{id}', [TeamController::class, 'show']);
+
+Route::put('/teamupdate', [TeamController::class, 'update']);
+
+Route::delete('/teamdestroy/{id}', [TeamController::class, 'destroy']);
+
+// Routes for TeamMemberController
+Route::get('/memberindex', [TeamMemberController::class, 'index']);
+
+Route::post('/membercreate', [TeamMemberController::class, 'store']);
+
+Route::get('/membershow/{id}', [TeamMemberController::class, 'show']);
+
+Route::put('/memberupdate/{id}', [TeamMemberController::class, 'update']);
+
+Route::delete('/memberdestroy/{id}', [TeamMemberController::class, 'destroy']);
+
 
 
 Route::post('/login', [UserController::class, 'login']);

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TeamMember extends Model
 {
+    protected $table = 'team_members';
     use HasFactory;
     protected $fillable = ['Team_ID', 'User_ID'];
 
