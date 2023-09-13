@@ -27,10 +27,10 @@ class TaskController extends Controller
     {
         return $tasks = Task::all();
     }
+
     /**
      * Update the tasks.
      */
-
     public function Update_task(Request $request, $id)
     {
         $task = Task::find($request->id);
@@ -47,6 +47,9 @@ class TaskController extends Controller
         ]);
     }
 
+    /**
+     * Re-assigning the tasks.
+     */
     public function reassign_task(Request $request, $id)
     {
         $task = Task::find($id);
@@ -60,7 +63,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the task
      */
     public function destroy($id)
     {
