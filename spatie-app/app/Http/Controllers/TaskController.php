@@ -8,72 +8,65 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     /**
-     * Assigning Task to User
+     * Creating Task
      */
-
-    /**
-     * Assigning Task to User
-     */
-    public function creatTask(Request $request)
+    public function assignTask(Request $request)
     {
-        //
-    }
-
-
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+        return Task::create([
+            'name' => $request->input('name'),
+            'status' => $request->input('status'),
+            'comments' => $request->input('comments'),
+            'user_id' => $request->input('user_id'),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the tasks.
      */
     public function show(Task $task)
     {
-        //
+        return $tasks = Task::all();
+    }
+    /**
+     * Update the tasks.
+     */
+
+    public function Update_task(Request $request, $id)
+    {
+        $task = Task::find($request->id);
+
+        $task->name = $request['name'];
+        $task->status = $request['status'];
+        $task->comments = $request['comment'];
+        $task->user_id = $request['user_id'];
+
+        $task->save();
+
+        return response()->json([
+            'message' => "Task Updated Successfully"
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
+    public function reassign_task(Request $request, $id)
     {
-        //
-    }
+        $task = Task::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Task $task)
-    {
-        //
+        $task->user_id = $request['user_id'];
+        $task->save();
+
+        return response()->json([
+            'message' => "Task Re-Assigned Successfully"
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+
+        return response()->json(['message' => 'Task Deleted Duccessfully']);
     }
 }
