@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-        /**
+    /**
      * Register User
     */
     public function register(Request $request){
