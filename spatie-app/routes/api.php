@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamMemberController;
 
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,8 +17,8 @@ use App\Http\Controllers\TeamMemberController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 // '/api/teams' -> this endpoint is for Team
@@ -29,3 +30,5 @@ Route::resource('teams', TeamController::class);
 Route::resource('team-members', TeamMemberController::class);
 
 
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'register']);
