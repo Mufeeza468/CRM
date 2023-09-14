@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TeamMember;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class TeamMemberController extends Controller
@@ -22,29 +23,27 @@ class TeamMemberController extends Controller
     public function store(Request $request)
     {
         return TeamMember::create([
-            'Team_ID' => $request->Team_ID,
-            'User_ID' => $request->User_ID,
+            'team_id' => $request->team_id,
+            'user_id' => $request->user_id,
         ]);
 
         // if ($validator->fails()) {
         //     return response()->json(['error' => $validator->errors()], 400);
         // }
-
         //$teamMember = TeamMember::create($request->all());
-
         //return response()->json(['message' => 'Team member created successfully', 'data' => $teamMember], 201);
     }
 
 
     public function destroy($id)
     {
-        $teamMember = TeamMember::find($id);
+        $user_id = User::find($id);
 
-        if (!$teamMember) {
+        if (!$user_id) {
             return response()->json(['error' => 'Team member not found'], 404);
         }
 
-        $teamMember->delete();
+        $user_id->delete();
 
         return response()->json(['message' => 'Team member deleted successfully']);
     }

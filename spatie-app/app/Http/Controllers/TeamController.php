@@ -23,8 +23,8 @@ class TeamController extends Controller
     {
         return Team::create([
             'name' => $request->input('name'),
-            'Department_ID' => $request->input('Department_ID'),
-            'TeamLead_ID' => $request->input('TeamLead_ID'),
+            'department_id' => $request->input('department_id'),
+            'teamlead_id' => $request->input('teamlead_id'),
         ]);
 
         //return response()->json(['message' => 'Team created successfully', 'data' => $team], 201);
@@ -56,8 +56,8 @@ class TeamController extends Controller
 
         $team->update([
             'name' => $request->name,
-            'Department_ID' => $request->Department_ID,
-            'TeamLead_ID' => $request->TeamLead_ID,
+            'department_id' => $request->department_id,
+            'teamlead_id' => $request->teamlead_id,
         ]);
         return response()->json(['message' => 'Team updated successfully', 'data' => $team]);
 

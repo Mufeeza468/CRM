@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Http\Controllers\Permission;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,6 +13,7 @@ class TaskController extends Controller
      */
     public function assignTask(Request $request)
     {
+
         return Task::create([
             'name' => $request->input('name'),
             'status' => $request->input('status'),
@@ -26,6 +28,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+
         return $tasks = Task::all();
     }
 
@@ -39,7 +42,7 @@ class TaskController extends Controller
 
         $task->name = $request['name'];
         $task->status = $request['status'];
-        $task->comments = $request['comment'];
+        $task->comments = $request['comments'];
         $task->user_id = $request['user_id'];
 
         $task->save();

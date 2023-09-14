@@ -14,39 +14,32 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = \App\Models\User::create([
-            'name' => 'mufeeza',
+            'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
+            'password' => '123456789',
         ]);
-        $user->givePermissionTo(['access_departments', 'create_departments', 'update_departments', 'add_team', 'update_team', 'assign_lead', 'assign_task', 'create_task', 'update_task', 'accept_or_reject_task', 'add_comments', 'update_users_data', 'delete_user', 'view_team']);
+        $user->givePermissionTo('admin access');
 
         $user = \App\Models\User::create([
             'name' => 'Business Owner',
-            'email' => 'businessowner@gmail.com',
-            'password' => Hash::make('password'),
+            'email' => 'owner@gmail.com',
+            'password' => '123456789',
         ]);
-        $user->givePermissionTo(['access_departments', 'create_departments', 'update_departments', 'add_team', 'update_team', 'assign_lead', 'assign_task', 'create_task', 'update_task', 'accept_or_reject_task', 'add_comments', 'update_users_data', 'delete_user', 'view_team', 'view_task']);
-
-        $user = \App\Models\User::create([
-            'name' => 'Department Head',
-            'email' => 'departmenthead@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
-        $user->givePermissionTo(['access_departments', 'create_departments', 'update_departments', 'add_team', 'update_team', 'assign_lead', , 'view_task', 'view_team']);
+        $user->givePermissionTo('owner access');
 
         $user = \App\Models\User::create([
             'name' => 'Team Lead',
-            'email' => 'teamlead@gmail.com',
-            'password' => Hash::make('password'),
+            'email' => 'lead@gmail.com',
+            'password' => '123456789',
         ]);
-        $user->givePermissionTo(['update_team', 'assign_task', 'create_task', 'update_task', 'accept_or_reject_task', 'add_comments', 'view_task', 'view_team']);
+        $user->givePermissionTo('team lead access');
 
         $user = \App\Models\User::create([
             'name' => 'Team Member',
-            'email' => 'teammember@gmail.com',
-            'password' => Hash::make('password'),
+            'email' => 'member@gmail.com',
+            'password' => '123456789',
         ]);
-        $user->givePermissionTo(['add_comments', 'view_task']);
+        $user->givePermissionTo('members access');
 
 
     }

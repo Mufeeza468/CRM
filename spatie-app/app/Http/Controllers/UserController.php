@@ -72,7 +72,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function user()
+    public function show()
     {
         return $user = User::all();
     }

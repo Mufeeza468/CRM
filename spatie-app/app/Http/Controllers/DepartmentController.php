@@ -11,9 +11,21 @@ class DepartmentController extends Controller
 {
     public function adding(Request $request)
     {
-        return Department::create([
+        $department = Department::create([
             'name' => $request->input('name'),
         ]);
+
+        if (Auth()->user()->hasPermission('owner access')) {
+
+            return $department;
+
+        } else {
+
+            // User does not have permission
+
+            return response()->json(['message' => 'Permission denied'], 403);
+
+        }
     }
 
     public function updating(Request $request, $id)
