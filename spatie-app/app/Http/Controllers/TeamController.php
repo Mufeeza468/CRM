@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 
 
-
-
 class TeamController extends Controller
 {
     // index: Get a list of all teams.
@@ -20,26 +18,6 @@ class TeamController extends Controller
         $teams = Team::all();
         return response()->json(['data' => $teams]);
     }
-
-    // store: Create a new team.
-
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'Department_ID' => 'required|exists:departments,id',
-    //         'TeamLead_ID' => 'required|exists:users,id',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json(['error' => $validator->errors()], 400);
-    //     }
-
-    //     $team = Team::create($request->all());
-
-    //     return response()->json(['message' => 'Team created successfully', 'data' => $team], 201);
-    // }
-
 
     public function store(Request $request)
     {
@@ -68,31 +46,6 @@ class TeamController extends Controller
         return response()->json(['data' => $team]);
     }
 
-    // update: Update a team's information.
-
-    // public function update(Request $request, $id)
-    // {
-    //     $team = Team::find($id);
-
-    //     if (!$team) {
-    //         return response()->json(['error' => 'Team not found'], 404);
-    //     }
-
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'Department_ID' => 'required|exists:departments,id',
-    //         'TeamLead_ID' => 'required|exists:users,id',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json(['error' => $validator->errors()], 400);
-    //     }
-
-    //     $team->update($request->all());
-
-    //     return response()->json(['message' => 'Team updated successfully', 'data' => $team]);
-    // }
-
     public function update(Request $request)
     {
         $team = Team::find($request->id);
@@ -100,11 +53,11 @@ class TeamController extends Controller
         if (!$team) {
             return response()->json(['error' => 'Team not found'], 404);
         }
-        
+
         $team->update([
-                'name' => $request->name,
-                'Department_ID' => $request->Department_ID,
-                'TeamLead_ID' => $request->TeamLead_ID,
+            'name' => $request->name,
+            'Department_ID' => $request->Department_ID,
+            'TeamLead_ID' => $request->TeamLead_ID,
         ]);
         return response()->json(['message' => 'Team updated successfully', 'data' => $team]);
 

@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
+
 use Illuminate\Support\Facades\Hash;
+
+use Spatie\Permission\Traits\HasRoles;
 
 class UserController extends Controller
 {
+    use HasRoles;
     /**
      * Register User
-    */
-    public function register(Request $request){
+     */
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required|alpha',
             'email' => 'required|email|unique:users',
@@ -28,12 +34,12 @@ class UserController extends Controller
             'email' => $email,
             'password' => $password,
             'role' => $role,
-        ]);        
+        ]);
 
-        if(! $user){
+        if (!$user) {
             return response()->json([
                 'message' => 'Something went wrong',
-            ], 500);    
+            ], 500);
         }
         return response()->json([
             'message' => 'Registeration Successfull',
@@ -63,7 +69,12 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Login Successfull',
             'token' => $token,
-        ], 200); 
+        ], 200);
+    }
+
+    public function user()
+    {
+        return $user = User::all();
     }
 
     /**
@@ -72,7 +83,7 @@ class UserController extends Controller
     public function logout()
     {
         auth()->user()->tokens()->delete();
-        return response()->json(['message' => 'Logout Successfull'],200);
+        return response()->json(['message' => 'Logout Successfull'], 200);
     }
 
 }

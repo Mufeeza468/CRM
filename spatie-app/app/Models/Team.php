@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Team extends Model
 {
-
     use HasFactory;
-    protected $fillable = ['name', 'status', 'comments', 'user_id'];
+    protected $fillable = ['name', 'department_id', 'teamlead_id'];
 }
